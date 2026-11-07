@@ -1,0 +1,277 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Grass.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/road/protos/Road.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/Tree.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/Pine.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/Forest.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/traffic/protos/SpeedLimitSign.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/traffic/protos/HighwayPole.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/traffic/protos/TrafficCone.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/vehicles/protos/toyota/ToyotaPriusSimple.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/vehicles/protos/tesla/TeslaModel3Simple.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/vehicles/protos/generic/TruckSimple.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/buildings/protos/SimpleBuilding.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/obstacles/protos/OilBarrel.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/rocks/protos/Rock.proto"
+
+WorldInfo {
+  title "RoadWatch"
+  basicTimeStep 8
+  gpsCoordinateSystem "WGS84"
+}
+Viewpoint {
+  orientation 0 1 0 1.5708
+  position 450 20 25
+}
+TexturedBackground {
+  texture "noon_cloudy_countryside"
+}
+TexturedBackgroundLight {
+  texture "noon_cloudy_countryside"
+  castShadows FALSE
+}
+Floor {
+  translation 750 0 -0.02
+  size 1700 300
+  tileSize 20 20
+  appearance Grass {
+  }
+}
+
+# ---------------------------------------------------------------
+# ROAD (+ crash barriers on both sides = highway look)
+# road center: y=0 for x 0-300 and 1200-1500, y=40 for x 600-900
+# ---------------------------------------------------------------
+Road {
+  translation 0 0 0.01
+  width 8
+  rightBorder FALSE
+  leftBorder FALSE
+  rightBarrier TRUE
+  leftBarrier TRUE
+  wayPoints [
+    0 0 0
+    300 0 0
+    600 40 0
+    900 40 0
+    1200 0 0
+    1500 0 0
+  ]
+  splineSubdivision 8
+}
+
+# ---------------------------------------------------------------
+# TREES - small clumps, 10-20 m from road center
+# ---------------------------------------------------------------
+# clump 1 (left side, first straight)
+Tree {
+  translation 150 12 0
+  name "tree_01"
+  scale 3 3 6
+}
+Tree {
+  translation 156 15 0
+  name "tree_02"
+  scale 2.5 2.5 5
+  texture "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/textures/oak_tree.png"
+}
+Tree {
+  translation 161 11 0
+  name "tree_03"
+  scale 2 2 4
+}
+# clump 2 (right side, first straight)
+Pine {
+  translation 240 -13 0
+  name "pine_01"
+}
+Pine {
+  translation 247 -16 0
+  name "pine_02"
+}
+# clump 3 (inside of first bend)
+Tree {
+  translation 440 32 0
+  name "tree_04"
+  scale 3 3 6
+  texture "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/textures/hazel_tree.png"
+}
+Tree {
+  translation 448 35 0
+  name "tree_05"
+  scale 2.5 2.5 5
+}
+# clump 4 (outside of first bend)
+Tree {
+  translation 470 2 0
+  name "tree_06"
+  scale 3 3 6
+  texture "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/textures/oak_tree.png"
+}
+# clump 5 (right side, middle straight)
+Pine {
+  translation 760 27 0
+  name "pine_03"
+}
+Tree {
+  translation 768 26 0
+  name "tree_07"
+  scale 2 2 4
+  texture "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/textures/birch_tree.png"
+}
+# clump 6 (second bend)
+Tree {
+  translation 1050 33 0
+  name "tree_08"
+  scale 3 3 6
+}
+Tree {
+  translation 1058 36 0
+  name "tree_09"
+  scale 2.5 2.5 5
+  texture "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/trees/protos/textures/hackberry_tree.png"
+}
+# clump 7 (left side, last straight)
+Tree {
+  translation 1380 13 0
+  name "tree_10"
+  scale 3 3 6
+}
+Pine {
+  translation 1388 -14 0
+  name "pine_04"
+}
+
+# ---------------------------------------------------------------
+# FOREST PATCHES - background only, ~50+ m from road
+# low density keeps the FPS alive
+# ---------------------------------------------------------------
+Forest {
+  translation 400 -70 0
+  shape [ -60 -20, 60 -20, 60 20, -60 20 ]
+  density 0.03
+  type "random"
+  randomSeed 1
+  groundTexture []
+  maxHeight 10
+  minHeight 5
+}
+Forest {
+  translation 1100 100 0
+  shape [ -50 -20, 50 -20, 50 20, -50 20 ]
+  density 0.03
+  type "random"
+  randomSeed 2
+  groundTexture []
+  maxHeight 10
+  minHeight 5
+}
+
+# ---------------------------------------------------------------
+# HIGHWAY SIGNS
+# ---------------------------------------------------------------
+SpeedLimitSign {
+  translation 100 -6 0
+  rotation 0 0 1 3.1416
+  name "speed_sign_01"
+}
+SpeedLimitSign {
+  translation 1000 14 0
+  rotation 0 0 1 3.1416
+  name "speed_sign_02"
+}
+SpeedLimitSign {
+  translation 1450 6 0
+  name "speed_sign_03"
+}
+# overhead gantry - if the arm points away from the road, add 3.1416 to the rotation angle
+HighwayPole {
+  translation 1250 -6 0
+  rotation 0 0 1 1.5708
+  name "gantry_01"
+}
+
+# ---------------------------------------------------------------
+# WORK ZONE - cones + barrels (a damage spot will go here later)
+# ---------------------------------------------------------------
+TrafficCone {
+  translation 1300 3.5 0
+  name "cone_01"
+}
+TrafficCone {
+  translation 1303 3.5 0
+  name "cone_02"
+}
+TrafficCone {
+  translation 1306 3.5 0
+  name "cone_03"
+}
+TrafficCone {
+  translation 1309 3.5 0
+  name "cone_04"
+}
+OilBarrel {
+  translation 1295 5.5 0.44
+  name "barrel_01"
+}
+OilBarrel {
+  translation 1296 6.3 0.44
+  name "barrel_02"
+}
+
+# ---------------------------------------------------------------
+# PARKED VEHICLES ON THE ROAD (occlusion test)
+# lane centers: y = -2 (right lane) and y = +2 (left lane) on straights
+# ---------------------------------------------------------------
+ToyotaPriusSimple {
+  translation 120 -2 0.4
+  name "car_01"
+  color 0.8 0.8 0.8
+}
+TeslaModel3Simple {
+  translation 210 2 0.4
+  rotation 0 0 1 3.1416
+  name "car_02"
+}
+TruckSimple {
+  translation 1150 -2 0.5
+  name "truck_01"
+}
+ToyotaPriusSimple {
+  translation 1420 2 0.4
+  rotation 0 0 1 3.1416
+  name "car_03"
+  color 0.6 0.1 0.1
+}
+
+# ---------------------------------------------------------------
+# ROADSIDE SCENERY - rest stop + rocks
+# ---------------------------------------------------------------
+SimpleBuilding {
+  translation 1000 -40 0
+  name "rest_stop"
+  floorNumber 1
+  corners [ 8 6, 8 -6, -8 -6, -8 6 ]
+  wallType "classic building"
+  roofShape "flat roof"
+}
+Rock {
+  translation 330 -9 0
+  name "rock_01"
+  scale 1.5
+}
+Rock {
+  translation 880 31 0
+  name "rock_02"
+  type "flat"
+  scale 2
+}
+Rock {
+  translation 1230 9 0
+  name "rock_03"
+  scale 1.2
+}

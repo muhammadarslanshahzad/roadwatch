@@ -17,6 +17,7 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/buildings/protos/SimpleBuilding.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/obstacles/protos/OilBarrel.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/rocks/protos/Rock.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/robots/dji/mavic/protos/Mavic2Pro.proto"
 
 WorldInfo {
   title "RoadWatch"
@@ -26,6 +27,7 @@ WorldInfo {
 Viewpoint {
   orientation 0 1 0 1.5708
   position 450 20 25
+  follow "drone_1"
 }
 TexturedBackground {
   texture "noon_cloudy_countryside"
@@ -274,4 +276,21 @@ Rock {
   translation 1230 9 0
   name "rock_03"
   scale 1.2
+}
+
+
+# ---------------------------------------------------------------------------------------------------
+# Drones
+# -----------------------------------------------------------------------------------------------------------
+
+Mavic2Pro {
+  translation 450 20 0.1
+  name "drone_1"
+  controller "<extern>"
+  cameraSlot [
+    Camera {
+      width 640
+      height 480
+    }
+  ]
 }

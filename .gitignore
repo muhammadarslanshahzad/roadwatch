@@ -1,0 +1,33 @@
+# ---------- data (too big for git) ----------
+data/
+*.zip
+
+# ---------- ML outputs (phase 3+) ----------
+runs/
+*.pt
+*.onnx
+*.engine
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ---------- Webots auto-generated files ----------
+# Webots creates hidden project/thumbnail files next to each world
+worlds/.*.wbproj
+worlds/.*.jpg
+
+# ---------- editors / OS ----------
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# ---------- secrets ----------
+.env

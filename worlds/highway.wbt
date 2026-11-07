@@ -22,7 +22,7 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 WorldInfo {
   title "RoadWatch"
   basicTimeStep 8
-  gpsCoordinateSystem "WGS84"
+  gpsCoordinateSystem "local"
 }
 Viewpoint {
   orientation 0 1 0 1.5708
